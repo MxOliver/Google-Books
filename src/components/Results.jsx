@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    MDBCardGroup, MDBCardBody, MDBCardTitle, MDBContainer, MDBCard
+ MDBCardBody, MDBCardTitle, MDBCard, MDBRow, MDBCol, MDBBtn
  } from 'mdbreact';
 
 class ResultsPage extends Component {
@@ -9,26 +9,64 @@ class ResultsPage extends Component {
         const results = this.props.results;
 
         const res = [];
-
-        for(let i in results){
-            console.log(results[i]);
-            // results[i].map(e => {
-            //     res.push(
-            //         <MDBCard>
-            //             <MDBCardTitle>{e.volumeInfo.title}</MDBCardTitle>
-            //             <MDBCardBody>
-            //                 <p>{e.volumeInfo.authors}</p>
-            //             </MDBCardBody>
-            //         </MDBCard>
-                    
-            //     )
-            // })
+        
+        if(results){
+            results['items'].forEach(e => {
+                console.log(e.selfLink)
+                if(e.volumeInfo.imageLinks !== undefined && e.volumeInfo.imageLinks.thumbnail !== undefined){
+                    res.push(
+                        <MDBCard key={e.id} style={{margin: '25px'}}>
+                        <MDBCardBody>
+                            <MDBRow>
+                            <MDBCol>
+                            <img src={e.volumeInfo.imageLinks.thumbnail} alt="cover" />
+                            </MDBCol>
+                            <MDBCol>
+                            <MDBCardTitle>
+                            <p>{e.volumeInfo.title}</p>
+                            </MDBCardTitle>
+                            <p>Author(s): {e.volumeInfo.authors} </p>
+                            <a href={e.selfLink} target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
+                            </MDBCol>
+                            </MDBRow>
+                        </MDBCardBody>                     
+                        </MDBCard>
+                    )
+                } else {
+                    res.push(
+                        <MDBCard key={e.id} style={{margin: '25px'}}>
+                        <MDBCardBody>
+                            <MDBRow>
+                            <MDBCol>
+                            <svg width="150" height="175" id="no-image">
+                                <rect width="130" height="175" style={{fill: "#d3d3d3"}} />
+                                <text x="65" y="75" fill="#696969" textAnchor="middle" alignmentBaseline="central">No Image</text>
+                                <text x="65" y="98" fill="#696969" textAnchor="middle" alignmentBaseline="central">Found</text>
+                            </svg>
+                            </MDBCol>
+                            <MDBCol>
+                            <MDBCardTitle>
+                            <p>{e.volumeInfo.title}</p>
+                            </MDBCardTitle>
+                            <p>Author(s): {e.volumeInfo.authors} </p>
+                            <a href={e.selfLink} target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
+                            </MDBCol>
+                            </MDBRow>
+                        </MDBCardBody>                     
+                        </MDBCard>
+                    )
+                }
+            })
+        } else {
+            res.push(
+                <p key="1">No books found.</p>
+            )
         }
 
         return (
-            <MDBCardGroup>
-                        
-            </MDBCardGroup>
+            <div>
+                {res}
+            </div>
         )
     }
 

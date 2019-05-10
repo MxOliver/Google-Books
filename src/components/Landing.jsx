@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ResultsPage from './Results';
-import { MDBContainer, MDBRow, MDBIcon, MDBBtn, MDBFormInline } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBIcon, MDBBtn, MDBFormInline, MDBCol } from 'mdbreact';
 import { searchActions } from '../actions/searchActions';
 
 function mapStateToProps(state){
@@ -57,7 +57,7 @@ class ConnectedLanding extends Component {
 
         return(
             <div className="content">
-            <MDBContainer id="searchbar">
+            <MDBContainer id="searchbar" style={{ paddingBottom: '25px', marginBottom: '35px'}}>
             <MDBRow>
             <MDBFormInline onSubmit={this.handleSubmit}>
                 <div className="form-group">
@@ -73,7 +73,7 @@ class ConnectedLanding extends Component {
                     </div>
                     <div className="form-group">
                     <select className="form-control" name="type" value={this.state.type} style={{ width: '150px' }} onChange={this.handleChange}>
-                        <option disabled>Search by...</option>
+                        <option value="">Search by...</option>
                         <option value="inauthor:">Author</option>
                         <option value="inpublisher:">Publisher</option>
                         <option value="intitle:">Title</option>
@@ -84,9 +84,12 @@ class ConnectedLanding extends Component {
                 </MDBFormInline>
             </MDBRow>
             </MDBContainer>
-            <MDBContainer>
+            <MDBRow>
+                <MDBCol sm="6">
                 <ResultsPage results={results} />
-            </MDBContainer>
+                </MDBCol>
+            </MDBRow>
+            
             </div>
         )
     }
