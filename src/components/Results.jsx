@@ -6,7 +6,7 @@ import {
 class ResultsPage extends Component {
 
     render() {
-        const { results } = this.props.results;
+        const results = this.props.results;
 
         const res = [];
 

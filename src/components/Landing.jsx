@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ResultsPage from './Results';
-import { MDBContainer, MDBRow, MDBIcon, MDBBtn } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBIcon, MDBBtn, MDBFormInline } from 'mdbreact';
+import { searchActions } from '../actions/searchActions';
 
 function mapStateToProps(state){
     const { results } = state.search;
@@ -15,29 +16,38 @@ class ConnectedLanding extends Component {
         super(props);
 
         this.state = {
-            searchParams: {
-                name: '',
-                type: ''
-            }
+            name: '',
+            type: ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.formatParams = this.formatParams.bind(this);
     }
 
     handleChange(e){
         const { value, name } = e.target;
-        this.setState({ searchParams: {
-            ...searchParams,
-            [name]: value
-        } });
+        this.setState({ [name]: value });
     }
 
     handleSubmit(e){
         e.preventDefault();
         const { dispatch } = this.props;
-        const { searchParams } = this.state;
-        dispatch(newSearch(searchParams));
+        const { name, type } = this.state;
+        console.log(type)
+        const formatedParams = {
+            name: this.formatParams(name),
+            type: type 
+        }
+        dispatch(searchActions.newSearch(formatedParams));
+    }
+
+    formatParams(str){
+        let regex = /\s/g;
+        if (str.match(regex) !== null) {
+            str = str.replace(regex, '+')
+        } 
+        return str += '+'
     }
 
 
@@ -49,26 +59,29 @@ class ConnectedLanding extends Component {
             <div className="content">
             <MDBContainer id="searchbar">
             <MDBRow>
-            <form onSubmit={this.handleSubmit}>
+            <MDBFormInline onSubmit={this.handleSubmit}>
+                <div className="form-group">
                 <input 
                     type="text"
                     placeholder="Search"
                     aria-label="search"
                     name="name"
                     onChange={this.handleChange}
-                    className="form-control" 
+                    className="form-control"
+                    style={{ marginRight: '10px', width: '355px' }} 
                     />
-                <select className="form-control">
-                    <option value="inauthor:">Author</option>
-                    <option value="inpublisher:">Publisher</option>
-                    <option value="intitle:">Title</option>
-                    <option value="isbn:">ISBN</option>
-                    <option value="lccn:">Library of Congress Control Number</option>
-                    <option value="oclc:">Online Computer Library Center Number</option>
-                </select>
-
-                <MDBBtn type="submit">Search <MDBIcon icon="search" /></MDBBtn>
-                </form>
+                    </div>
+                    <div className="form-group">
+                    <select className="form-control" name="type" value={this.state.type} style={{ width: '150px' }} onChange={this.handleChange}>
+                        <option disabled>Search by...</option>
+                        <option value="inauthor:">Author</option>
+                        <option value="inpublisher:">Publisher</option>
+                        <option value="intitle:">Title</option>
+                        <option value="isbn:">ISBN</option>
+                    </select>
+                    </div>
+                <MDBBtn type="submit" size="sm">Search <MDBIcon icon="search" /></MDBBtn>
+                </MDBFormInline>
             </MDBRow>
             </MDBContainer>
             <MDBContainer>

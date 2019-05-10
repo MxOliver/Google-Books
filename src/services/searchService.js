@@ -1,5 +1,3 @@
-import { googleAuth } from '../helpers/googleAuth';
-
 export const searchService = {
     newSearch
 }

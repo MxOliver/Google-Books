@@ -1,6 +1,6 @@
 import { searchConstants } from '../constants/searchConstants';
 import { alertActions } from './alertActions';
-import searchService from '../services/searchService';
+import { searchService } from '../services/searchService';
 
 export const searchActions = {
     newSearch

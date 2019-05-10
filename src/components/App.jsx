@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom';
-import { history } from '../../helpers/history';
-import { alertActions } from '../../actions/alertActions';
+import { history } from '../helpers/history';
+import { alertActions } from '../actions/alertActions';
 import Landing from './Landing';
 
 class connectedApp extends Component {

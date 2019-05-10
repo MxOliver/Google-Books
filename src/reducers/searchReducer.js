@@ -5,12 +5,14 @@ export function search(state = {}, action){
         case searchConstants.SEARCH_REQUEST:
             return {
                 sending: true,
-                results: action.results
+                results: action.results,
+                params: action.params
             }
         case searchConstants.SEARCH_SUCCESS:
             return {
                 sent: true,
-                results: action.results
+                results: action.results,
+                params: action.params
             }
         case searchConstants.SEARCH_FAILURE:
             return {};
