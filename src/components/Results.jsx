@@ -26,7 +26,7 @@ class ResultsPage extends Component {
                             <p>{e.volumeInfo.title}</p>
                             </MDBCardTitle>
                             <p>Author(s): {e.volumeInfo.authors} </p>
-                            <a href={e.selfLink} target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
+                            <a href={e.selfLink} rel="noopener noreferrer" target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
                             </MDBCol>
                             </MDBRow>
                         </MDBCardBody>                     
@@ -49,7 +49,7 @@ class ResultsPage extends Component {
                             <p>{e.volumeInfo.title}</p>
                             </MDBCardTitle>
                             <p>Author(s): {e.volumeInfo.authors} </p>
-                            <a href={e.selfLink} target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
+                            <a href={e.selfLink} rel="noopener noreferrer" target="_blank"><MDBBtn outline color="primary">Find Out More</MDBBtn></a>
                             </MDBCol>
                             </MDBRow>
                         </MDBCardBody>                     
