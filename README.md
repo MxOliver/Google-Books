@@ -1,6 +1,6 @@
 ## Google Books Search
 
-This is a simple single-page react app created as an exercise on using the google books API to search for books by title/author/isb/publisher/etc and return the results with their respective cover images and a link to the google books JSON file to learn more. 
+This is a simple single-page react app created as an exercise on using the google books API to search for books by title/author/isb/publisher/etc and return the results with their respective cover images and a link to the google books JSON file to learn more. It is deployed [here](https://mxoliver-googlebooks.herokuapp.com/) but if you'd like to run it on your local server see [here](#local-set-up)
 
 Stack: React.js + Material Design's Bootstrap for React
 
