@@ -10,7 +10,7 @@ class ResultsPage extends Component {
 
         const res = [];
         
-        if(results){
+        if(results && results['totalItems'] > 0){
             results['items'].forEach(e => {
                 console.log(e.selfLink)
                 if(e.volumeInfo.imageLinks !== undefined && e.volumeInfo.imageLinks.thumbnail !== undefined){
